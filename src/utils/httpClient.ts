@@ -180,7 +180,7 @@ export class HttpClient {
         Object.assign(options, certificate);
 
         // set proxy
-        if (settings.proxy && !HttpClient.ignoreProxy(httpRequest.url, settings.excludeHostsForProxy)) {
+        if (settings.proxy && settings.enableProxy && !HttpClient.ignoreProxy(httpRequest.url, settings.excludeHostsForProxy)) {
             const proxyEndpoint = url.parse(settings.proxy);
             if (/^https?:$/.test(proxyEndpoint.protocol || '')) {
                 const proxyOptions = {

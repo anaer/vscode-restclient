@@ -394,11 +394,17 @@
           "scope": "resource",
           "description": "Send out anonymous usage data"
         },
+        "rest-client.enableProxy": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "description": "using proxy settings"
+        },
         "rest-client.excludeHostsForProxy": {
           "type": "array",
           "default": [],
           "scope": "resource",
-          "description": "Excluded hosts when using using proxy settings"
+          "description": "Excluded hosts when using proxy settings"
         },
         "rest-client.fontSize": {
           "type": "number",

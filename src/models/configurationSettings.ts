@@ -26,6 +26,7 @@ export interface IRestClientSettings {
     readonly proxyStrictSSL: boolean;
     readonly rememberCookiesForSubsequentRequests: boolean;
     readonly enableTelemetry: boolean;
+    readonly enableProxy: boolean;
     readonly excludeHostsForProxy: string[];
     readonly fontSize?: number;
     readonly fontFamily?: string;
@@ -60,6 +61,7 @@ export class SystemSettings implements IRestClientSettings {
     private _proxyStrictSSL: boolean;
     private _rememberCookiesForSubsequentRequests: boolean;
     private _enableTelemetry: boolean;
+    private _enableProxy: boolean;
     private _excludeHostsForProxy: string[];
     private _fontSize?: number;
     private _fontFamily?: string;
@@ -117,6 +119,10 @@ export class SystemSettings implements IRestClientSettings {
 
     public get enableTelemetry() {
         return this._enableTelemetry;
+    }
+
+    public get enableProxy() {
+        return this._enableProxy;
     }
 
     public get excludeHostsForProxy() {
@@ -256,6 +262,7 @@ export class SystemSettings implements IRestClientSettings {
         if (this._timeoutInMilliseconds < 0) {
             this._timeoutInMilliseconds = 0;
         }
+        this._enableProxy = restClientSettings.get<boolean>('enableProxy', true);
         this._excludeHostsForProxy = restClientSettings.get<string[]>("excludeHostsForProxy", []);
         this._fontSize = restClientSettings.get<number>("fontSize");
         this._fontFamily = restClientSettings.get<string>("fontFamily");
@@ -359,6 +366,10 @@ export class RestClientSettings implements IRestClientSettings {
 
     public get enableTelemetry() {
         return this.systemSettings.enableTelemetry;
+    }
+
+    public get enableProxy() {
+        return this.systemSettings.enableProxy;
     }
 
     public get excludeHostsForProxy() {
